@@ -1,4 +1,4 @@
-const getRating = (miles, carbon, visualisation) => {
+export const getRating = (miles, carbon, visualisation) => {
   return {
     miles: miles,
     carbon: carbon,
@@ -8,10 +8,9 @@ const getRating = (miles, carbon, visualisation) => {
 }
 
 const carbonToRating = (carbon) => {
+	carbonIndex = [10, 20, 30, 40];
 
-	carbonIndex = [10,20,30,40];
-
-	for(int=0; i<4; i++){
+	for(int = 0; i < 4; i++){
 		if(carbon < carbonIndex[i]){
 			return (5 - i);
 		}

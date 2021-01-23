@@ -1,4 +1,4 @@
-const milesToCarbon = (miles) => {
+export const milesToCarbon = (miles) => {
   const weight = 0.001; //tonnes
 
   let method;
@@ -20,7 +20,7 @@ const milesToCarbon = (miles) => {
   return weight * emissions[method] * miles * 1.609; // in grams
 }
 
-const carbonToVisualisation = (carbon) => {
+export const carbonToVisualisation = (carbon) => {
   const vis = Math.floor(Math.random() * 4);
   if (vis == 0){
     return "Equivalent to " + (carbon / 171).toFixed(2) + "  miles in a car";

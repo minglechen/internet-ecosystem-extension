@@ -4,13 +4,13 @@ import { locationStringToLongitudeLatitude, getBrowserLongitudeLatitude, getMile
 import { milesToCarbon } from './carbon.js';
 import { getRating } from './rating';
 
-const getUrlsFromPage = (document) => {
+export const getUrlsFromPage = (document) => {
   return [
     'https://???'
   ];
 }
 
-const getLocationStringFromUrl = async (url) => {
+export const getLocationStringFromUrl = async (url) => {
   const html = await axios.get(url);
   const dom = new DOMParser().parseFromString(html, 'text/html');
 
@@ -27,7 +27,7 @@ const getLocationStringFromUrl = async (url) => {
   return text;
 }
 
-const getHtmlFromLocationString = (locationString) => {
+export const getHtmlFromLocationString = (locationString) => {
   const longitudeLatitude1 = locationStringToLongitudeLatitude(locationString);
   const longitudeLatitude2 = getBrowserLongitudeLatitude();
   const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude1, longitudeLatitude2);
@@ -39,9 +39,3 @@ const getHtmlFromLocationString = (locationString) => {
 
   return `<div>${leafHtml.repeat(rating)}</div>`;
 }
-
-// Content script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if(request.ping) { sendResponse({pong: true}); return; }
-  /* Content script action */
-});

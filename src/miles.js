@@ -1,3 +1,6 @@
+let browser_longitude = 0;
+let browser_latitude = 0;
+
 const locationStringToLongitudeLatitude = (locationString) => {
   /*
   Use a google api to convert the location string into longitude and latitude
@@ -34,12 +37,8 @@ const returnLongitudeLatitude = (position) => {
   /*
   Return the longitude and latitude for the position
   */
-  const longitude = position.coords.longitude;
-  const latitude = position.coords.latitude;
-  return {
-    longitude,
-    latitude,
-  }
+  browser_longitude = position.coords.longitude;
+  browser_latitude = position.coords.latitude;
 }
 
 const getMilesBetweenLongitudeLatitudes = (longitude1, latitude1, longitude2, latitude2) => {

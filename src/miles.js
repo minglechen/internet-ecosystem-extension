@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const locationStringToLongitudeLatitude = async (locationString) => {
+export const locationStringToLongitudeLatitude = async (locationString) => {
   /*
    Use a google geoencoding api to convert the location string into longitude and latitude
    */
@@ -15,13 +15,13 @@ const locationStringToLongitudeLatitude = async (locationString) => {
   };
 }
 
-const getPosition = () => {
+getPosition = () => {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
 }
 
-const getBrowserLongitudeLatitude = async () => {
+export const getBrowserLongitudeLatitude = async () => {
   /*
    Use Geolocation API to get the browser longitude and latitude
    */
@@ -42,7 +42,7 @@ const getBrowserLongitudeLatitude = async () => {
   }
 }
 
-const getMilesBetweenLongitudeLatitudes = ({longitude1, latitude1}, {longitude2, latitude2}) => {
+export const getMilesBetweenLongitudeLatitudes = ({longitude1, latitude1}, {longitude2, latitude2}) => {
   /*
    input: longitude, latitude of two positions in degrees
    output: miles between the two locations

@@ -1,23 +1,19 @@
 let browser_longitude = 0;
 let browser_latitude = 0;
 
-const locationStringToLongitudeLatitude = (locationString) => {
+const locationStringToLongitudeLatitude = async (locationString) => {
   /*
-  Use a google api to convert the location string into longitude and latitude
+  Use a google geoencoding api to convert the location string into longitude and latitude
   */
- var geocoder = new google.maps.Geocoder();
- 
- geocoder.geocode( { 'address': locationString}, function(results, status) {
- 
- if (status == google.maps.GeocoderStatus.OK) {
-  var latitude = results[0].geometry.location.lat();
-  var longitude = results[0].geometry.location.lng();
-    return {
-      latitude,
-      longitude,
-    }
-     } 
- }); 
+  var geocoder = new google.maps.Geocoder();
+
+  const {results} = await geocoder.geocode({ 'address': locationString });
+  const latitude = results[0].geometry.location.lat();
+  const longitude = results[0].geometry.location.lng();
+  return {
+    latitude,
+    longitude,
+  };
 }
 
 const getBrowserLongitudeLatitude = () => {
@@ -31,6 +27,10 @@ const getBrowserLongitudeLatitude = () => {
   else{
     console.log(`Geolocation is not supported by this browser.`);
   }
+  return {
+    browser_longitude,
+    browser_latitude,
+  }
 }
 
 const returnLongitudeLatitude = (position) => {
@@ -41,7 +41,7 @@ const returnLongitudeLatitude = (position) => {
   browser_latitude = position.coords.latitude;
 }
 
-const getMilesBetweenLongitudeLatitudes = (longitude1, latitude1, longitude2, latitude2) => {
+const getMilesBetweenLongitudeLatitudes = ({longitude1, latitude1}, {longitude2, latitude2}) => {
   /*
   input: longitude, latitude of two positions in degrees
   output: miles between the two locations

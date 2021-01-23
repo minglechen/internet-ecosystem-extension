@@ -19,5 +19,5 @@ from .views import MileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api', MileView.as_view(), name="get_location"),
+    path('', MileView.as_view(), name="get_location"),
 ]

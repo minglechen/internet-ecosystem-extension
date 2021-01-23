@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { locationStringToLongitudeLatitude, getBrowserLongitudeLatitude, getMilesBetweenLongitudeLatitudes } from 'miles.js';
+import { locationStringToLongitudeLatitude, getBrowserLongitudeLatitude, getMilesBetweenLongitudeLatitudes } from './miles.js';
 import { milesToCarbon } from './carbon.js';
 import { getRating } from './rating';
 

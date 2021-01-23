@@ -1,12 +1,13 @@
+import axios from 'axios';
+
 const locationStringToLongitudeLatitude = async (locationString) => {
   /*
    Use a google geoencoding api to convert the location string into longitude and latitude
    */
-  var geocoder = new google.maps.Geocoder();
 
-  const { results } = await geocoder.geocode({ 'address': locationString });
-  const latitude = results[0].geometry.location.lat();
-  const longitude = results[0].geometry.location.lng();
+  const { data } = await axios.post("www.api.com", { locationString });
+
+  const { longitude, latitude } = data;
 
   return {
     latitude,
@@ -56,6 +57,4 @@ const getMilesBetweenLongitudeLatitudes = ({longitude1, latitude1}, {longitude2,
   return 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
 }
 
-const degreeToRadius = (deg) => {
-  return deg * Math.PI / 180;
-}
+const degreeToRadius = (deg) =>  deg * Math.PI / 180;

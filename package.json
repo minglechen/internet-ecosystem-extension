@@ -1,0 +1,8 @@
+{
+  "name": "internet-ecosystem-extension",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Internet-Ecosystem-Team/internet-ecosystem-extension.git",
+  "author": "Internet Ecosystem Team",
+  "license": "MIT"
+}

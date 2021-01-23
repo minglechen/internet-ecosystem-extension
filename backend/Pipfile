@@ -5,6 +5,12 @@ name = "pypi"
 
 [packages]
 django = "*"
+djangorestframework = "*"
+requests = "*"
+django-cors-headers = "*"
+whitenoise = "*"
+googlemaps = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.7"

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from .views import MileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api', MileView.as_view(), name="get_location"),
 ]

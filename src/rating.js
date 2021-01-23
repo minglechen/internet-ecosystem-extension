@@ -7,7 +7,7 @@ const getRating = (miles, carbon, visualisation) => {
   };
 }
 
-const carbonToRating() = (carbon) => {
+const carbonToRating = (carbon) => {
 
 	carbonIndex = [10,20,30,40];
 

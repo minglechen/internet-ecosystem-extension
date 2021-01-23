@@ -1,4 +1,4 @@
-import { getUrlsFromPage } from './carbon';
+import { getUrlsFromPage } from './ebay.js';
 
 window.onload = () => {
   if (true) { // change to check if on search page later

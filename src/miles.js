@@ -5,9 +5,7 @@ export const locationStringToLongitudeLatitude = async (locationString) => {
    Use a google geoencoding api to convert the location string into longitude and latitude
    */
 
-  const { data } = await axios.post("www.api.com", { locationString });
-
-  const { longitude, latitude } = data;
+  const { longitude, latitude } = await axios.post("https://internet-ecosystem-extension.herokuapp.com/", { locationString });
 
   return {
     latitude,

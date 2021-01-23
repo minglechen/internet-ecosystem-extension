@@ -4,5 +4,8 @@
   "main": "index.js",
   "repository": "https://github.com/Internet-Ecosystem-Team/internet-ecosystem-extension.git",
   "author": "Internet Ecosystem Team",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
 }

@@ -16,7 +16,7 @@ function ensureSendMessage(tabId, message, callback){
       }
     });
   }
-  
+
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     ensureSendMessage(tabs[0].id, {greeting: "hello"});
   });

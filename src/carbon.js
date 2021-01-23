@@ -2,16 +2,20 @@ const milesToCarbon = (miles) => {
   const weight = 0.001; //tonnes
   let method;
   if (miles < 500){
-      method = "road";
-} else if (miles < 3000){
-      method = "short-haul air";
-}
-    else {
-      method = "long-haul air"
-    }
-  
-  const emissions = {"road": 62, "rail": 22, "short-haul air": 1752, "long-haul air": 602}; //in grams per tonne, per km
-  
+    method = "road";
+  } else if (miles < 3000){
+        method = "short-haul air";
+  } else {
+    method = "long-haul air"
+  }
+
+  const emissions = {
+    "road": 62,
+    "rail": 22,
+    "short-haul air": 1752,
+    "long-haul air": 602
+  }; //in grams per tonne, per km
+
   return weight * emissions[method] * miles * 1.609; //in grams
 }
 

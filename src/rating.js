@@ -1,9 +1,9 @@
-const getRating = (miles, carbon) => {
+const getRating = (miles, carbon, visualisation) => {
   return {
     miles: miles,
     carbon: carbon,
     leaves: carbonToRating(carbon), // from 0 to 5
-    visualisation: carbonToVisualisation(carbon),
+    visualisation: visualisation,
   };
 }
 
@@ -18,13 +18,4 @@ const carbonToRating() = (carbon) => {
 	}
 
 	return 1;
-}
-
-//The average new car emits 120.1g/km of CO
-
-const carbonToVisualisation() = (carbon) => { 
-	if(carbon < 1000){
-		visualisation = `driving ${Math.ceiling(carbon / 120)} km`
-	}
-	return `Transporting this good is the equivilant of ${visualisation}`
 }

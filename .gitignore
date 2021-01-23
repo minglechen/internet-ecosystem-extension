@@ -107,4 +107,4 @@ dist
 .tern-port
 
 # Config.js
-.src/config.js
+backend/ecosystem/ecosystem/config.py

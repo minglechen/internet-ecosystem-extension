@@ -4,12 +4,18 @@ window.onload = () => {
   addRating(document);
 }
 
-// Content script
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  if (request.ping) {
-    sendResponse({ pong: true });
-    return;
-  }
 
-  /* Content script action */
+chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  if ((msg.from === 'popup') && (msg.status === 'ready')) {
+
+    var domInfo = {
+      status: "success",
+      waiting: "initial",
+      notSupported: "none"
+    };
+
+    // Directly respond to the sender (popup), 
+    // through the specified callback.
+    response(domInfo);
+  }
 });

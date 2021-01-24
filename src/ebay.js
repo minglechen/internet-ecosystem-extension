@@ -49,3 +49,4 @@ export const getHtmlFromLocationString = (locationString) => {
 
   return `<div>${leafHtml.repeat(5)}</div>`;
 }
+

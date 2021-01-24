@@ -5,7 +5,9 @@ export const locationStringToLongitudeLatitude = async (locationString) => {
    Use a google geoencoding api to convert the location string into longitude and latitude
    */
 
-  const { longitude, latitude } = await axios.post("https://internet-ecosystem-extension.herokuapp.com/", { locationString });
+  const { data } = await axios.post("https://internet-ecosystem-extension.herokuapp.com/", { locationString });
+
+  const { longitude, latitude } = data;
 
   return {
     latitude,
@@ -40,12 +42,15 @@ export const getBrowserLongitudeLatitude = async () => {
   }
 }
 
-export const getMilesBetweenLongitudeLatitudes = ({longitude1, latitude1}, {longitude2, latitude2}) => {
+export const getMilesBetweenLongitudeLatitudes = (
+  {longitude: longitude1 , latitude: latitude1},
+  {longitude: longitude2, latitude: latitude2}
+) => {
   /*
-   input: longitude, latitude of two positions in degrees
-   output: miles between the two locations
-   implementation detail: uses Haversine formula to determine the great-circle distance between two points on a sphere
-   */
+  input: longitude, latitude of two positions in degrees
+  output: miles between the two locations
+  implementation detail: uses Haversine formula to determine the great-circle distance between two points on a sphere
+  */
 
   const R = 3958.8; // Radius of the Earth in miles
   const rlat1 = degreeToRadius(latitude1); // Convert degrees to radians

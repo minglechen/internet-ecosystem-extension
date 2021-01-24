@@ -1,9 +1,13 @@
-export const getRating = (miles, carbon, visualisation) => {
+import { milesToCarbon, carbonToVisualisation } from './carbon.js';
+
+export const getRating = (miles) => {
+	const carbon = milesToCarbon(miles);
+
   return {
-    miles: miles,
-    carbon: carbon,
-    leaves: carbonToRating(carbon), // from 0 to 5
-    visualisation: visualisation,
+    miles,
+    carbon,
+    rating: carbonToRating(carbon), // from 0 to 5
+    visualisation: carbonToVisualisation(carbon),
   };
 }
 

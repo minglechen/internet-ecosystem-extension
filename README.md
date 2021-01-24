@@ -1,4 +1,4 @@
-# internet-ecosystem-extension
+# Internet-ecosystem-extension
 Browser extension to calculate air miles
 
 ## Inspiration

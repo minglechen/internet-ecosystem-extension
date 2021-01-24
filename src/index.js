@@ -4,18 +4,27 @@ window.onload = () => {
   addRating(document);
 }
 
-
-chrome.runtime.onMessage.addListener((msg, sender, response) => {
-  if ((msg.from === 'popup') && (msg.status === 'ready')) {
-
+chrome.runtime.onConnect.addListener(function(port) {
+console.assert(port.name == "connect");
+port.onMessage.addListener((msg, sender, response) => {
+  if (msg.status === 'ready') {
     var domInfo = {
       status: "success",
       waiting: "initial",
       notSupported: "none"
     };
 
-    // Directly respond to the sender (popup), 
-    // through the specified callback.
-    response(domInfo);
+    port.postMessage(domInfo);
   }
+  if (msg.status === 'setLocation') {
+
+    var domInfo = {
+      status: "succesfully set location",
+      waiting: "initial",
+      notSupported: "none"
+    };
+
+    port.postMessage(domInfo);
+  }
+});
 });

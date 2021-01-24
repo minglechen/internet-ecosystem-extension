@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { locationStringToLongitudeLatitude, getBrowserLongitudeLatitude, getMilesBetweenLongitudeLatitudes } from './miles.js';
-import { milesToCarbon } from './carbon.js';
 import { getRating } from './rating';
 
 const itemLocationRegex = /<span>Item location:<\/span>([\s\S]+?)<\/div>/
@@ -10,17 +9,27 @@ export const addRating = async (document) => {
   const elements = document.getElementsByClassName("s-item");
 
   let url = null;
+  let userLongitudeLatitude;
+
+  try {
+    userLongitudeLatitude = await getBrowserLongitudeLatitude();
+  } catch {
+    console.log("Geolocation denied");
+    return;
+  }
+
 
   await Promise.all(Array.prototype.forEach.call(elements, async (element) => {
     try {
       url = element.getElementsByClassName("s-item__link")[0]?.getAttribute("href");
 
       if (!url) {
+        console.log("URL not found")
         return;
       }
 
       const locationString = await getLocationStringFromUrl(url);
-      const div = await getHtmlFromLocationString(locationString);
+      const div = await getHtmlFromLocationString(locationString, userLongitudeLatitude);
       element.getElementsByClassName("s-item__info clearfix")[0].innerHTML += div;
     } catch (err) {
       console.log(`ERROR: ${err}, URL="${url}"`);
@@ -37,16 +46,23 @@ export const getLocationStringFromUrl = async (url) => {
   return text;
 }
 
-export const getHtmlFromLocationString = (locationString) => {
-  // const longitudeLatitude1 = locationStringToLongitudeLatitude(locationString);
-  // const longitudeLatitude2 = getBrowserLongitudeLatitude();
-  // const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude1, longitudeLatitude2);
-  // const carbon = milesToCarbon();
-  // const { rating, visualisation } = getRating(miles, carbon);
+export const getHtmlFromLocationString = async (locationString, userLongitudeLatitude) => {
+  const longitudeLatitude = await locationStringToLongitudeLatitude(locationString);
+  const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude, userLongitudeLatitude);
+  const { carbon, rating, visualisation } = getRating(miles);;
 
-  const leafUrl = "https://static.thenounproject.com/png/1882848-200.png";
-  const leafHtml = `<img src="${leafUrl}" alt="Leaf" width="32px" height="32px" />`;
+  const leafUrl = 'https://static.thenounproject.com/png/1882848-200.png';
+  const leafHtml = (green) => `<img src="${leafUrl}" alt="Leaf"${green ? 'class="iee--green"' : ''}/>`;
 
-  return `<div>${leafHtml.repeat(5)}</div>`;
+  return `
+    <div class="iee--leaves">
+      ${leafHtml(true).repeat(rating)}${leafHtml(false).repeat(5 - rating)}
+      <div class="iee--hide">
+        <p>${miles.toFixed(2)} miles</p>
+        <p>${carbon.toFixed(2)} grams of carbon</p>
+        <p>${visualisation}</p>
+      </div>
+    </div>
+  `;
 }
 

@@ -1,0 +1,31 @@
+.iee--hide {
+  display: none;
+  border: 1px solid #91D1A0;
+  background-color: white;
+  border-radius: 8px;
+  position: absolute;
+  top: 44px;
+  left: 0;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  z-index: 1000;
+}
+
+.iee--leaves:hover > .iee--hide {
+  display: block;
+  color: black;
+}
+
+.iee--leaves > img {
+  width: 32px;
+  height: 32px;
+}
+
+.iee--leaves > img.iee--green {
+  filter: invert(1) contrast(1000%) sepia(1) saturate(20) hue-rotate(230deg) invert(1);
+}
+
+.iee--leaves {
+  position: relative;
+  margin-top: 4px;
+}

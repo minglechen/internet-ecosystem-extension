@@ -46,42 +46,22 @@ export const getLocationStringFromUrl = async (url) => {
   return text;
 }
 
-/*
-export const getHtmlFromLocationString = async (locationString, userLongitudeLatitude) => {
-  const longitudeLatitude = await locationStringToLongitudeLatitude(locationString);
-  const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude, userLongitudeLatitude);
-  const { carbon, rating, visualisation } = getRating(miles);
-
-  const leafUrl = 'https://static.thenounproject.com/png/1882848-200.png';
-  const filter = 'style="filter: invert(1) contrast(1000%) sepia(1) saturate(20) hue-rotate(230deg) invert(1);"le="filter=invert(1) contrast(1000%) sepia(1) saturate(20) hue-rotate(230deg) invert(1)"';
-  const leafHtml = (green) => `<img src="${leafUrl}" alt="Leaf" width="32px" height="32px"${green ? filter : ''}/>`;
-
-  return `<div>${leafHtml(true).repeat(rating)}${leafHtml(false).repeat(5 - rating)}</div>`;
-}
-*/
-
 export const getHtmlFromLocationString = async (locationString, userLongitudeLatitude) => {
   const longitudeLatitude = await locationStringToLongitudeLatitude(locationString);
   const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude, userLongitudeLatitude);
   const { carbon, rating, visualisation } = getRating(miles);;
 
   const leafUrl = 'https://static.thenounproject.com/png/1882848-200.png';
-  const filter = 'style="filter: invert(1) contrast(1000%) sepia(1) saturate(20) hue-rotate(230deg) invert(1);"le="filter=invert(1) contrast(1000%) sepia(1) saturate(20) hue-rotate(230deg) invert(1)"';
-  const leafHtml = (green) => `<img src="${leafUrl}" alt="Leaf" width="32px" height="32px"${green ? filter : ''}/>`;
+  const leafHtml = (green) => `<img src="${leafUrl}" alt="Leaf"${green ? 'class="iee--green"' : ''}/>`;
 
-  const leavesHtml = `<div class="leaf">${leafHtml(true).repeat(rating)}${leafHtml(false).repeat(5 - rating)}</div>`;
-
-  const div = ['<style>',
-    '.hide {',
-    '  display: none;',
-    '}',
-    '.leaf:hover + .hide {',
-    '  display: block;',
-    '  color: black;',
-    '}',
-    '</style>',
-    leavesHtml,
-    '<div class="hide"><h1>'+visualisation+'</h1></div>'
-  ].join("");
-  return div;
+  return `
+    <div class="iee--leaves">
+      ${leafHtml(true).repeat(rating)}${leafHtml(false).repeat(5 - rating)}
+      <div class="iee--hide">
+        <p>${miles.toFixed(2)} miles</p>
+        <p>${carbon.toFixed(2)} grams of carbon</p>
+        <p>${visualisation}</p>
+      </div>
+    </div>
+  `;
 }

@@ -19,7 +19,8 @@
         "https://www.ebay.com/sch/*",
         "http://www.ebay.com/sch/*"
       ],
-      "js": ["index.js"]
+      "js": ["index.js"],
+      "css": ["main.css"]
     }
   ],
 

@@ -5,9 +5,17 @@ import { milesToCarbon } from './carbon.js';
 import { getRating } from './rating';
 
 export const addRating = (document) => {
-  const locationString = getLocationStringFromUrl(window.location.href);
-  const div = getHtmlFromLocationString(locationString);
-  document.getElementById("itemTitle").innerHTML = document.getElementById("itemTitle").innerHTML + div;
+  let elements = document.getElementsByClassName("s-item    ");
+  for (element of elements){
+    try {
+      let url = element.getElementsByClassName("s-item__link")[0].getAttribute("href");
+      const locationString = getLocationStringFromUrl(url);
+      const div = getHtmlFromLocationString(locationString);
+      element.getElementsByClassName("s-item__info clearfix")[0].innerHTML += div;
+    }
+    catch (err) {
+    }
+  }
 }
 
 export const getLocationStringFromUrl = async (url) => {

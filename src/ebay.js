@@ -8,7 +8,6 @@ const itemLocationRegex = /<span>Item location:<\/span>([\s\S]+?)<\/div>/
 export const addRating = async (document) => {
   const elements = document.getElementsByClassName("s-item");
 
-  let url = null;
   let userLongitudeLatitude;
 
   try {
@@ -21,7 +20,7 @@ export const addRating = async (document) => {
 
   await Promise.all(Array.prototype.forEach.call(elements, async (element) => {
     try {
-      url = element.getElementsByClassName("s-item__link")[0]?.getAttribute("href");
+      const url = element.getElementsByClassName("s-item__link")[0]?.getAttribute("href");
 
       if (!url) {
         console.log("URL not found")
@@ -32,7 +31,7 @@ export const addRating = async (document) => {
       const div = await getHtmlFromLocationString(locationString, userLongitudeLatitude);
       element.getElementsByClassName("s-item__info clearfix")[0].innerHTML += div;
     } catch (err) {
-      console.log(`ERROR: ${err}, URL="${url}"`);
+      console.log(JSON.stringify(err));
     }
   }));
 }
@@ -65,4 +64,3 @@ export const getHtmlFromLocationString = async (locationString, userLongitudeLat
     </div>
   `;
 }
-

@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
       notSupported: "none"
     };
 
-    // Directly respond to the sender (popup), 
+    // Directly respond to the sender (popup),
     // through the specified callback.
     response(domInfo);
   }

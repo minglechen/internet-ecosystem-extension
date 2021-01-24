@@ -38,14 +38,29 @@ export const getLocationStringFromUrl = async (url) => {
 }
 
 export const getHtmlFromLocationString = (locationString) => {
-  // const longitudeLatitude1 = locationStringToLongitudeLatitude(locationString);
-  // const longitudeLatitude2 = getBrowserLongitudeLatitude();
-  // const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude1, longitudeLatitude2);
-  // const carbon = milesToCarbon();
-  // const { rating, visualisation } = getRating(miles, carbon);
+  /*
+  const longitudeLatitude1 = locationStringToLongitudeLatitude(locationString);
+  const longitudeLatitude2 = getBrowserLongitudeLatitude();
+  const miles = getMilesBetweenLongitudeLatitudes(longitudeLatitude1, longitudeLatitude2);
+  const carbon = milesToCarbon(miles);
+  const visualisation = carbonToVisualisation(carbon);
+  const leaves = carbonToRating(carbon);
+  */
+ const leaves = 3;
+ const visualisation = "Visualisation";
 
   const leafUrl = "https://static.thenounproject.com/png/1882848-200.png";
   const leafHtml = `<img src="${leafUrl}" alt="Leaf" width="32px" height="32px" />`;
-
-  return `<div>${leafHtml.repeat(5)}</div>`;
+  const div = ['<style>',
+      '.hide {',
+      '  display: none;',
+      '}',
+      '.leaf:hover + .hide {',
+      '  display: block;',
+      '  color: black;',
+      '}',
+    '</style>',
+    '<div class="leaf">'+leafHtml.repeat(leaves)+'</div>',
+    '<div class="hide"><h1>'+visualisation+'</h1></div>'].join("");
+  return div;
 }

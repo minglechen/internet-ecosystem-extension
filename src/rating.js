@@ -8,11 +8,11 @@ export const getRating = (miles, carbon, visualisation) => {
 }
 
 const carbonToRating = (carbon) => {
-	carbonIndex = [10, 20, 30, 40];
+	const carbonIndex = [10, 20, 30, 40];
 
-	for(int = 0; i < 4; i++){
-		if(carbon < carbonIndex[i]){
-			return (5 - i);
+	for (let i = 0; i < 4; i++) {
+		if (carbon < carbonIndex[i]) {
+			return 5 - i;
 		}
 	}
 

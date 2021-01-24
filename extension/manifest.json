@@ -1,30 +1,37 @@
 {
-    "manifest_version": 2,
-    "name": "Internet ecosystem",
-    "version": "0.1",
-    "short_name": "Internet eco",
-    "description": "Browser extension to calculate air miles",
-    
-    "browser_action": {
-      "default_icon": "images/icon.png",
-      "default_popup": "html/popup.html",
-       "default_title": "Internet ecosystem"
-    },
-    
-    "content_scripts": [
+  "manifest_version": 2,
+  "name": "Internet Ecosystem",
+  "version": "0.1",
+  "short_name": "Internet eco",
+  "description": "Browser extension to calculate air miles",
+
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Internet Ecosystem"
+  },
+
+  "content_scripts": [
     {
       "matches": [
-          "*://www.ebay.co.uk/sch/*"
+        "https://www.ebay.co.uk/sch/*",
+        "http://www.ebay.co.uk/sch/*",
+        "https://www.ebay.com/sch/*",
+        "http://www.ebay.com/sch/*"
       ],
-      "js": ["src/ebay.js"]
+      "js": ["index.js"]
     }
   ],
-    "permissions": [
-      "tabs"
-     ],
-    
-    "background": {
-      "scripts": ["src/background.js"],
-      "persistent": true
-    }
+
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "geolocation",
+    "*://www.ebay.co.uk/sch/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
   }
+}

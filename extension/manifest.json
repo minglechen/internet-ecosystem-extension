@@ -6,18 +6,23 @@
   "description": "Browser extension to calculate air miles",
 
   "browser_action": {
-    "default_icon": "images/icon.png",
+    "default_icon": "images/icon.jpg",
     "default_popup": "html/popup.html",
     "default_title": "Internet Ecosystem"
   },
-
+  "icons": {
+    "16":"images/icon.jpg",
+    "48":"images/icon.jpg",
+    "128":"images/icon.jpg"
+  },
   "content_scripts": [
     {
       "matches": [
         "https://www.ebay.co.uk/sch/*",
         "http://www.ebay.co.uk/sch/*",
         "https://www.ebay.com/sch/*",
-        "http://www.ebay.com/sch/*"
+        "http://www.ebay.com/sch/*",
+        "http://www.ebay.co.uk/b/*"
       ],
       "js": ["index.js"]
     }

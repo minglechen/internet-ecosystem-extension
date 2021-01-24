@@ -21,35 +21,18 @@ export const milesToCarbon = (miles) => {
 }
 
 export const carbonToVisualisation = (carbon) => {
-  const vis = Math.floor(Math.random() * 3);
-  if (carbon < 100){
-    if (vis == 0){
-      return "Equivalent to travelling " + (carbon / 41).toFixed(2) + "  km on a train";
-    }
-    if (vis == 1){
-      return "Equivalent to " + (carbon / 36).toFixed(2) + " hours of streaming video";
-    }
-    if (vis == 2){
-      return "Equivalent to turning an LED light on for " + (carbon / 1.43).toFixed(2) + " minutes";
-    }
-  }
-  if (vis == 2){
-    return "Equivalent to heating a house for " + (carbon / 291).toFixed(2) + " hours";
-  }
-  if (carbon < 2000 ){
-    if (vis == 0){
-      return "Equivalent to driving " + (carbon / 171).toFixed(2) + "  km in a car";
-    }
-    if (vis == 1){
-      return "Equivalent to growing " + (carbon / 500).toFixed(2) + " loaves of bread";
-    }
-  }
-
-  if (vis == 0){
-    return "Equivalent to flying " + (carbon / 133).toFixed(2) + "  km in a plane";
-  }
-  if (vis == 1){
-    return "Equivalent to a cow's emissions in " + (carbon / 262).toFixed(2) + " hours";
-  }
-  
+  const options = [
+    "Equivalent to travelling " + (carbon / 41).toFixed(2) + "  km on a train",
+    "Equivalent to " + (carbon / 36).toFixed(2) + " hours of streaming video",
+    "Equivalent to turning an LED light on for " + (carbon / 1.43).toFixed(2) + " minutes",
+    "Equivalent to heating a house for " + (carbon / 291).toFixed(2) + " hours",
+    "Equivalent to driving " + (carbon / 171).toFixed(2) + "  km in a car",
+    "Equivalent to growing and baking " + (carbon / 500).toFixed(2) + " loaves of bread",
+    "Equivalent to flying " + (carbon / 133).toFixed(2) + "  km in a plane",
+    "Equivalent to a cow's emissions in " + (carbon / 262).toFixed(2) + " hours"
+  ]
+  if (carbon < 200){
+    return options[Math.floor(Math.random() * 3)];
+  } 
+  return options[3 + Math.floor(Math.random() * 5)];
 }

@@ -6,8 +6,15 @@ window.addEventListener('DOMContentLoaded', () => {
     currentWindow: true
   }, tabs => {
     // ...and send a request for the DOM info...
+<<<<<<< HEAD
     startListener(tabs[0].id, {status: "ready"});
     
+=======
+    chrome.tabs.sendMessage(
+        tabs[0].id,
+        {from: 'popup', status: 'ready'}, setDOMInfo);
+  });
+>>>>>>> b6ebc7864b6c12a7b328b68be8af49f9362c3c8d
 });
 
 });

@@ -13,7 +13,7 @@ export const locationStringToLongitudeLatitude = async (locationString) => {
   };
 }
 
-getPosition = () => {
+const getPosition = () => {
   return new Promise((resolve, reject) => {
     navigator.geolocation.getCurrentPosition(resolve, reject);
   });
